@@ -1,1 +1,1 @@
-# PROHIRE-SENA.
+Carga de modulos funcionales PROHIRE.
