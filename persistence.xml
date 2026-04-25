@@ -1,0 +1,27 @@
+package com.prohire.controller;
+import com.prohire.dao.VacanteDAO;
+import com.prohire.model.Vacante;
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "VacanteServlet", urlPatterns = {"/VacanteServlet"})
+public class VacanteServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Vacante v = new Vacante();
+        v.setId_empresa(Integer.parseInt(request.getParameter("id_empresa")));
+        v.setCargo(request.getParameter("cargo"));
+        v.setSalario(request.getParameter("salario"));
+        v.setModalidad(request.getParameter("modalidad"));
+        v.setTipo_contrato(request.getParameter("tipo_contrato"));
+        v.setUbicacion(request.getParameter("ubicacion"));
+        v.setDescripcion(request.getParameter("descripcion"));
+        
+        if (new VacanteDAO().registrar(v)) response.getWriter().print("<h1>✅ Vacante Publicada</h1><a href='vacante.jsp'>Volver</a>");
+        else response.getWriter().print("<h1>❌ Error</h1>");
+    }
+}
